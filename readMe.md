@@ -32,17 +32,23 @@ This project enables automatic SMS notifications via WhatsApp for unread emails 
 2. Install necessary dependencies by running:
 `npm install`
 3. Create an `.env` file in the root directory and add the following environment variables:
+`TWILIO_ACCOUNT_SID=your_account_sid
+TWILIO_AUTH_TOKEN=your_auth_token
+TWILIO_WHATSAPP_NUMBER=your_whatsapp_number
+PORT=your_preferred_port`
+3. Use Ngrok to expose your local server by running:
+`ngrok http server_port`
 4. Start the server using:
 `node server.js`
 
 
 ## How It Works
-- **Google App Script**: Monitors the Gmail account for unread emails based on specific labels.
-- **Node.js Server**: Receives data from Google App Script and utilizes the Twilio API to send SMS notifications via WhatsApp.
-- **Twilio API**: Manages the delivery of SMS messages to the user's WhatsApp number.
+- **Google App Script (GAS)**: Google App Script (GAS): Executes periodically to check for unread emails in the Gmail account.
+- **Data Transfer**: Data Transfer: If unread emails are found, GAS sends a request with the email details to the external server hosted via Ngrok.
+- **SMS Notification**: The server processes this data and uses Twilio to send an SMS notification through WhatsApp to the specified user number.
 
 ## Usage
-To receive notifications, ensure that your Gmail account, Node.js server, and Twilio WhatsApp messaging are properly configured. Notifications will be sent automatically according to the triggers set in Google App Scripts.
+Ensure the system is properly configured to start receiving SMS notifications for unread emails. Check your server and script logs to monitor activity and troubleshoot any issues.
 
 ## Contributing
 Feel free to fork this project and contribute by submitting a pull request. We appreciate improvements to the codebase, especially in enhancing the robustness of the email checking and SMS sending functionalities.
